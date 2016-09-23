@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BoxBonus</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_title">Just title</string>
+    <string name="item_desc">Just loren Ipsum desc, lalala</string>
+    <string name="Yourbonus">У вас 30 бонусов</string>
+    <string name="shops_button">Магазины</string>
+    <string name="map_button">Карта</string>
+    <string name="gifts_button">Подарки</string>
+    <string name="home_button">Кабинет</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_shop">ShopActivity</string>
+    <string name="detail_location">Piazza del Duomo the cathedral which locates in Florence</string>
+    <string name="detail_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis         nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute         irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia         deserunt mollit anim id est laborum.</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
