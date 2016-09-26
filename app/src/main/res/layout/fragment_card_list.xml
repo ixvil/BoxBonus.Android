@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_image_height"
             android:scaleType="centerCrop"
-            tools:src="@mipmap/firstcard" />
+            tools:src="@mipmap/logo1" />
 
         <TextView
             android:id="@+id/card_title"
@@ -29,8 +29,9 @@
             android:layout_alignBottom="@+id/card_image"
             android:layout_marginLeft="@dimen/md_keylines"
             tools:text="@string/item_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/colorPrimary" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            <!--android:textColor="@color/colorPrimary" -->
+
 
         <TextView
             android:id="@+id/card_text"
@@ -44,8 +45,9 @@
             tools:text="@string/item_desc"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading" />
+            <!--android:textColor="@color/dark_grey"-->
+
 
         <Button
             android:id="@+id/action_button"
@@ -64,8 +66,8 @@
             app:srcCompat="@drawable/ic_share_black_24dp"
             android:layout_below="@+id/card_text"
             android:layout_alignParentRight="true"
-            style="?android:attr/borderlessButtonStyle"
-            android:tint="@color/button_grey" />
+            style="?android:attr/borderlessButtonStyle" />
+            <!--android:tint="@color/button_grey" -->
 
         <ImageButton
             android:id="@+id/like_button"
@@ -76,8 +78,8 @@
             android:layout_toLeftOf="@+id/share_button"
             android:layout_below="@+id/card_text"
 
-            style="?android:attr/borderlessButtonStyle"
-            android:tint="@color/button_grey" />
+            style="?android:attr/borderlessButtonStyle" />
+            <!--android:tint="@color/button_grey" -->
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

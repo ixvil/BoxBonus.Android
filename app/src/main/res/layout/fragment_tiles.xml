@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tile_height"
         android:scaleType="centerCrop"
-        tools:src="@drawable/a" />
+        tools:src="@mipmap/logo1" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/tile_height"
-        android:alpha="0.3"
-        android:background="@color/dark_grey" />
+        android:alpha="0.3" />
+        <!--android:background="@color/dark_grey" -->
 
     <TextView
         android:id="@+id/tile_title"
@@ -25,6 +25,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/item_title"
-        android:textColor="@color/white"
         android:textSize="@dimen/article_titles" />
+        <!--android:textColor="@color/white"-->
+
 </RelativeLayout>

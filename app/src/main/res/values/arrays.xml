@@ -93,4 +93,9 @@
         <item>@mipmap/logo9</item>
         <item>@mipmap/logo10</item>
     </array>
+    <array name="tab_icons">
+        <item>@drawable/ic_home_tab</item>
+        <item>@drawable/ic_shops_tab</item>
+        <item>@drawable/ic_present_tab</item>
+    </array>
 </resources>
