@@ -30,4 +30,7 @@
         completions."
     </string>
     <string name="title_activity_main2">Main2Activity</string>
+
+    <integer name="com_vk_sdk_AppId">5651075</integer>
+
 </resources>

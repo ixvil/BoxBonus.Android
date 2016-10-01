@@ -23,7 +23,7 @@ import com.ixvil.boxbonus.dummy.DummyContent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements  HomeFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements  HomeFragment.OnFragmentInteractionListener{
 
     private DrawerLayout mDrawerLayout;
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements  HomeFragment.OnF
 
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
-            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+//            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_left_menu);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements  HomeFragment.OnF
         adapter.addFragment(new HomeFragment(), getResources().getString(R.string.home_button));
         adapter.addFragment(new CardContentFragment(), getResources().getString(R.string.shops_button));
         adapter.addFragment(new TileContentFragment(), getResources().getString(R.string.gifts_button));
-        adapter.addFragment(new MapFragment(), getResources().getString(R.string.map_button));
-
         viewPager.setAdapter(adapter);
     }
 
