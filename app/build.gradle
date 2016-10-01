@@ -36,4 +36,5 @@ dependencies {
     compile 'com.vk:androidsdk:1.6.5'
 
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

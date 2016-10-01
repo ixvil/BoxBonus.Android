@@ -17,7 +17,6 @@
         import android.widget.ImageButton;
         import android.widget.ImageView;
         import android.widget.TextView;
-        import android.widget.Toast;
 
 /**
  * Provides UI for the view with Cards.
