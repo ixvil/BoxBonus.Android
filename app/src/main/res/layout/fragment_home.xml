@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,5 +7,96 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_marginRight="@dimen/md_keylines"
+            android:foreground="?attr/selectableItemBackground">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/card_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card_image"
+                    android:layout_marginBottom="@dimen/md_keylines"
+                    android:layout_marginLeft="@dimen/md_keylines"
+                    android:layout_marginRight="@dimen/md_keylines"
+                    android:layout_marginTop="@dimen/md_keylines"
+                    android:layout_weight="0.4"
+
+                    android:ellipsize="end"
+                    android:textSize="@dimen/bonus_text_size"
+                    tools:text="25 бонусов" />
+
+
+                <TextView
+                    android:id="@+id/walletID"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card_text"
+                    android:ellipsize="end"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/bonus_text_size"
+                    tools:text="00000000" />
+
+
+                <ImageButton
+                    android:id="@+id/share_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/cards_button_width"
+                    android:layout_height="@dimen/cards_button_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/card_text"
+                    android:layout_marginRight="@dimen/md_keylines"
+
+                    app:srcCompat="@drawable/ic_share_black_24dp" />
+                <!--android:tint="@color/button_grey" -->
+
+                <ImageButton
+                    android:id="@+id/like_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="@dimen/cards_button_width"
+                    android:layout_height="@dimen/cards_button_height"
+                    android:layout_below="@+id/card_text"
+                    android:layout_marginRight="@dimen/md_keylines"
+                    android:layout_toLeftOf="@+id/share_button"
+
+                    app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/card_image"
+                    android:layout_width="@dimen/pic_height"
+                    android:layout_height="@dimen/pic_height"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/md_keylines"
+                    android:scaleType="centerCrop"
+                    tools:src="@mipmap/code" />
+                <!--android:tint="@color/button_grey" -->
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -108,8 +109,11 @@ public class HomeFragment extends Fragment {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+//        TextView walletHolder;
+
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.fragment_home, parent, false));
+//            walletHolder = (TextView) itemView.findViewById(R.id.walletID);
         }
     }
 
@@ -120,16 +124,28 @@ public class HomeFragment extends Fragment {
         public ContentAdapter() {
         }
 
+        /**
+         * @param parent
+         * @param viewType
+         * @return ViewHolder
+         */
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
         }
 
+        /**
+         * @param holder
+         * @param position
+         */
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            // no-op
+//            holder.walletHolder.setText("12312333");
         }
 
+        /**
+         * @return int
+         */
         @Override
         public int getItemCount() {
             return LENGTH;

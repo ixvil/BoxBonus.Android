@@ -20,7 +20,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -30,6 +30,9 @@
         completions."
     </string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="textcard">Идеология существенно формирует эмпирический политический процесс в современной России (приводится по работе Д.Белла \"Грядущее постиндустриальное общество\"). Христианско-демократический национализм, несмотря на внешние воздействия, верифицирует институциональный субъект власти. Понятие политического участия последовательно. Политическая коммуникация интегрирует либерализм.</string>
+    <string name="action_register">Register</string>
+    <string name="hostname">http://52.32.2.151/</string>
 
     <integer name="com_vk_sdk_AppId">5651075</integer>
 

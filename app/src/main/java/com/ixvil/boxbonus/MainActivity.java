@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (User.userId == null) {
+        if (User.userId == 0) {
             VKSdk.login(this, null);
         }
 
@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), getResources().getString(R.string.home_button));
-        adapter.addFragment(new CardContentFragment(), getResources().getString(R.string.shops_button));
-        adapter.addFragment(new TileContentFragment(), getResources().getString(R.string.gifts_button));
+//        adapter.addFragment(new CardContentFragment(), getResources().getString(R.string.shops_button));
+//        adapter.addFragment(new TileContentFragment(), getResources().getString(R.string.gifts_button));
         viewPager.setAdapter(adapter);
     }
 
@@ -131,18 +131,20 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
 
             @Override
             public void onResult(VKAccessToken res) {
-                User.userId = res.userId;
+                User applicationUser = new User(getApplicationContext());
+                applicationUser.vkAuth(res.userId);
+
 
             }
 
             @Override
             public void onError(VKError error) {
-                User.userId = null;
+                User.userId = 0;
             }
         })) {
             super.onActivityResult(requestCode, resultCode, data);
