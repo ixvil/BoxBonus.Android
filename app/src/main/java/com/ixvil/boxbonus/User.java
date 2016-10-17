@@ -12,7 +12,7 @@ import com.koushikdutta.ion.Ion;
  */
 
 public class User {
-    private static JsonObject userData;
+    public static JsonObject userData;
     private Context context;
     public static int userId = 0;
 
