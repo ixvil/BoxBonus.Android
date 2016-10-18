@@ -32,6 +32,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -52,6 +56,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +91,43 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button mEmailRegisterButton = (Button) findViewById(R.id.email_register_button);
+        mEmailRegisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptRegister();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private View checkCredentialsValidity(String email, String password) {
+        // Reset errors.
+        mEmailView.setError(null);
+        mPasswordView.setError(null);
+
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+        }
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+        } else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
+        }
+        return focusView;
     }
 
 
@@ -94,37 +138,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private void attemptLogin() {
 
-
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
-        View focusView = null;
+        View focusView = checkCredentialsValidity(email, password);
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
+        if (null != focusView) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
@@ -132,39 +152,111 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+            try {
+                Ion.with(getApplicationContext())
+                        .load(getResources().getString(R.string.hostname) + "json/login")
+                        .setMultipartParameter("email", email)
+                        .setMultipartParameter("password", Hashing.sha256()
+                                .hashString(password, StandardCharsets.UTF_8)
+                                .toString())
+                        .asJsonObject()
+                        .setCallback(new FutureCallback<JsonObject>() {
+                            @Override
+                            public void onCompleted(Exception e, JsonObject result) {
+                                if (e == null) {
+                                    JsonObject userJson = result.getAsJsonObject("data");
+                                    int userId = userJson.get("id").getAsInt();
+                                    if (0 != userId) {
 
-            Ion.with(getApplicationContext())
-                    .load(getResources().getString(R.string.hostname) + "json/login")
-                    .setMultipartParameter("email", email)
-                    .setMultipartParameter("password", Hashing.sha256()
-                            .hashString(password, StandardCharsets.UTF_8)
-                            .toString())
-                    .asJsonObject()
-                    .setCallback(new FutureCallback<JsonObject>() {
-                        @Override
-                        public void onCompleted(Exception e, JsonObject result) {
-                            JsonObject userJson = result.getAsJsonObject("data");
-                            int userId = userJson.get("id").getAsInt();
-                            if (0 != userId) {
+                                        User.userId = userId;
+                                        User.userData = userJson;
 
-                                User.userId = userId;
-                                User.userData = userJson;
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
 
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
+                                    } else {
+                                        User.userData = null;
+                                        User.userId = 0;
 
-                            } else {
-                                User.userData = null;
-                                User.userId = 0;
+                                        mPasswordView.setError(getString(R.string.auth_error));
+                                        mPasswordView.requestFocus();
+                                        showProgress(false);
 
-                                mPasswordView.setError(getString(R.string.auth_error));
-                                mPasswordView.requestFocus();
-                                showProgress(false);
+                                    }
+                                } else {
+                                    mPasswordView.setError(getString(R.string.auth_error));
+                                    mPasswordView.requestFocus();
+                                    showProgress(false);
+                                    result = new JsonObject();
+                                }
                             }
-                        }
 
 
-                    });
+                        });
+
+            } catch (Exception e) {
+                mPasswordView.setError(e.getMessage().toString());
+                mPasswordView.requestFocus();
+                showProgress(false);
+            }
+        }
+    }
+
+
+    private void attemptRegister() {
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+
+        View focusView = checkCredentialsValidity(email, password);
+
+        if (null != focusView) {
+            focusView.requestFocus();
+        } else {
+            showProgress(true);
+            try {
+                Ion.with(getApplicationContext())
+                        .load(getResources().getString(R.string.hostname) + "json/register")
+                        .setMultipartParameter("email", email)
+                        .setMultipartParameter("password", Hashing.sha256()
+                                .hashString(password, StandardCharsets.UTF_8)
+                                .toString())
+                        .asJsonObject()
+                        .setCallback(new FutureCallback<JsonObject>() {
+                            @Override
+                            public void onCompleted(Exception e, JsonObject result) {
+                                if (e == null) {
+                                    JsonObject userJson = result.getAsJsonObject("data");
+                                    int userId = userJson.get("id").getAsInt();
+                                    if (0 != userId) {
+
+                                        User.userId = userId;
+                                        User.userData = userJson;
+
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+
+                                    } else {
+                                        User.userData = null;
+                                        User.userId = 0;
+
+                                        mPasswordView.setError(userJson.get("message").getAsString());
+                                        mPasswordView.requestFocus();
+                                        showProgress(false);
+                                    }
+                                } else {
+                                    mPasswordView.setError(e.getMessage().toString());
+                                    mPasswordView.requestFocus();
+                                    showProgress(false);
+                                    result = new JsonObject();
+                                }
+                            }
+
+                        });
+            } catch (Exception e) {
+                mPasswordView.setError(e.getMessage().toString());
+                mPasswordView.requestFocus();
+                showProgress(false);
+            }
         }
     }
 
@@ -253,6 +345,42 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Login Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
     }
 
 
