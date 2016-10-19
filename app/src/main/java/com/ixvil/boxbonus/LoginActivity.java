@@ -3,11 +3,7 @@ package com.ixvil.boxbonus;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.test.espresso.core.deps.guava.hash.Hashing;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -16,7 +12,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -37,14 +32,13 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.JsonObject;
+import com.ixvil.boxbonus.models.User;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -65,6 +59,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
@@ -139,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void attemptLogin() {
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        final String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         View focusView = checkCredentialsValidity(email, password);
@@ -153,12 +149,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             try {
+                final String mPassword = Hashing.sha256()
+                        .hashString(password, StandardCharsets.UTF_8)
+                        .toString();
                 Ion.with(getApplicationContext())
                         .load(getResources().getString(R.string.hostname) + "json/login")
                         .setMultipartParameter("email", email)
-                        .setMultipartParameter("password", Hashing.sha256()
-                                .hashString(password, StandardCharsets.UTF_8)
-                                .toString())
+                        .setMultipartParameter("password", mPassword)
                         .asJsonObject()
                         .setCallback(new FutureCallback<JsonObject>() {
                             @Override
@@ -168,14 +165,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     int userId = userJson.get("id").getAsInt();
                                     if (0 != userId) {
 
-                                        User.userId = userId;
-                                        User.userData = userJson;
-
+                                        User user = User.createUserFromJson(userJson, getApplicationContext());
+                                        user.saveToAccountManager(email, mPassword);
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
 
                                     } else {
-                                        User.userData = null;
                                         User.userId = 0;
 
                                         mPasswordView.setError(getString(R.string.auth_error));
@@ -204,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     private void attemptRegister() {
-        String email = mEmailView.getText().toString();
+        final String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         View focusView = checkCredentialsValidity(email, password);
@@ -214,6 +209,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             showProgress(true);
             try {
+                final String mPassword = Hashing.sha256()
+                        .hashString(password, StandardCharsets.UTF_8)
+                        .toString();
                 Ion.with(getApplicationContext())
                         .load(getResources().getString(R.string.hostname) + "json/register")
                         .setMultipartParameter("email", email)
@@ -229,14 +227,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     int userId = userJson.get("id").getAsInt();
                                     if (0 != userId) {
 
-                                        User.userId = userId;
-                                        User.userData = userJson;
-
+                                        User user = User.createUserFromJson(userJson, getApplicationContext());
+                                        user.saveToAccountManager(email, mPassword);
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
 
                                     } else {
-                                        User.userData = null;
                                         User.userId = 0;
 
                                         mPasswordView.setError(userJson.get("message").getAsString());

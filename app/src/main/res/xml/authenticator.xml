@@ -1,0 +1,2 @@
+<account-authenticator xmlns:android="/web/20150729061818/http://schemas.android.com/apk/res/android"
+    android:accountType="@string/accountType" />

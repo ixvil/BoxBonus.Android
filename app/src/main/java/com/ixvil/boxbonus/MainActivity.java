@@ -1,5 +1,7 @@
 package com.ixvil.boxbonus;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.ixvil.boxbonus.models.User;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -32,9 +35,10 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (User.userId == 0) {
-            VKSdk.login(this, null);
-        }
+
+        AccountManager am = AccountManager.get(this);
+
+        Account[] account = am.getAccountsByType(getString(R.string.accountType));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -130,24 +134,4 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
-
-            @Override
-            public void onResult(VKAccessToken res) {
-                User applicationUser = new User(getApplicationContext());
-                applicationUser.vkAuth(res.userId);
-
-
-            }
-
-            @Override
-            public void onError(VKError error) {
-                User.userId = 0;
-            }
-        })) {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
 }
