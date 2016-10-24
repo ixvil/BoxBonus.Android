@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
-//            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_left_menu);
+            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), getResources().getString(R.string.home_button));
-//        adapter.addFragment(new CardContentFragment(), getResources().getString(R.string.shops_button));
+        adapter.addFragment(new CardContentFragment(), getResources().getString(R.string.shops_button));
 //        adapter.addFragment(new TileContentFragment(), getResources().getString(R.string.gifts_button));
         viewPager.setAdapter(adapter);
     }
