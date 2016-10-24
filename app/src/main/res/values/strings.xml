@@ -37,6 +37,7 @@
     <string name="accountType">com.ixvil.boxbonus</string>
     <string name="text.logout">Выйти</string>
     <string name="message_noserver">Сервер не отвечает, попробуйте позже</string>
+    <string name="tfbonuses">У вас 25 бонусов</string>
 
     <integer name="com_vk_sdk_AppId">5651075</integer>
 

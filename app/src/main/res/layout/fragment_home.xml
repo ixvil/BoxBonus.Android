@@ -40,7 +40,6 @@
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:layout_marginRight="@dimen/md_keylines"
                     android:layout_marginTop="@dimen/md_keylines"
-                    android:layout_weight="0.4"
 
                     android:ellipsize="end"
                     android:textSize="@dimen/bonus_text_size"
@@ -88,7 +87,7 @@
                     android:layout_height="@dimen/pic_height"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/md_keylines"
+                    android:layout_marginTop="5dp"
                     android:scaleType="centerCrop"
                     tools:src="@mipmap/code" />
                 <!--android:tint="@color/button_grey" -->

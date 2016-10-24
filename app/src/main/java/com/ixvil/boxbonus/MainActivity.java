@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
