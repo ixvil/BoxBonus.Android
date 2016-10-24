@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/navigation.buttons"
+        android:checkableBehavior="single">
         <item
             android:icon="@drawable/ic_home_black_24dp"
             android:title="One" />
@@ -16,6 +18,14 @@
             android:title="Three" />
         <!--android:tint="@color/button_grey"-->
 
+
+    </group>
+    <group>
+
+        <item
+            android:id="@+id/logoutButton"
+            android:icon="@drawable/ic_backspace_black_24dp"
+            android:title="@string/text.logout" />
 
     </group>
 </menu>

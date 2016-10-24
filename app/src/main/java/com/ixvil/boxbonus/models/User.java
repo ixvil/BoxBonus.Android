@@ -1,16 +1,9 @@
 package com.ixvil.boxbonus.models;
 
 import android.accounts.Account;
-
-import android.accounts.AccountManager;
-
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-
 import com.google.gson.JsonObject;
-
 
 public class User {
 
@@ -51,16 +44,25 @@ public class User {
         SharedPreferences sharedPreferences = this.context.getSharedPreferences("account", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("email", email );
+        editor.putString("email", email);
         boolean result = editor.commit();
-
-
-//        AccountManager am = AccountManager.get(this.context);
-//        boolean result = am.addAccountExplicitly(account, password, null);
 
         return result;
     }
 
+    /**
+     * @param applicationContext
+     * @return boolean
+     */
+    static public boolean logout(Context applicationContext) {
+        SharedPreferences sharedPreferences = applicationContext.getSharedPreferences("account", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.remove("email");
+        boolean result = editor.commit();
+
+        return result;
+    }
 
     /**
      * Create User From Json Object

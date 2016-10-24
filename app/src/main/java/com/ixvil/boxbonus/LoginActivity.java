@@ -180,7 +180,7 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
 
                                     }
                                 } else {
-                                    mPasswordView.setError(getString(R.string.auth_error));
+                                    mPasswordView.setError(getString(R.string.message_noserver));
                                     mPasswordView.requestFocus();
                                     showProgress(false);
                                     result = new JsonObject();
@@ -191,7 +191,7 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
                         });
 
             } catch (Exception e) {
-                mPasswordView.setError(e.getMessage().toString());
+                mPasswordView.setError(e.getMessage());
                 mPasswordView.requestFocus();
                 showProgress(false);
             }

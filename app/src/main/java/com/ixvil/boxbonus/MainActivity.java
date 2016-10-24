@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private DrawerLayout mDrawerLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -62,9 +62,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         // Set item in checked state
-                        menuItem.setChecked(true);
-                        // TODO: handle navigation
-                        // Closing drawer on item click
+                        if (menuItem.getItemId() == R.id.logoutButton) {
+                            User.logout(getApplicationContext());
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+                            menuItem.setChecked(true);
+                        }
+
+
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
