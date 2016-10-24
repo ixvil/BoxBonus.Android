@@ -1,17 +1,16 @@
 package com.ixvil.boxbonus.models;
 
 import android.accounts.Account;
+
 import android.accounts.AccountManager;
+
+
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 
 import com.google.gson.JsonObject;
-import com.ixvil.boxbonus.R;
 
-import static android.support.test.InstrumentationRegistry.getContext;
-
-/**
- * Created by shipin_a on 02.10.2016.
- */
 
 public class User {
 
@@ -41,13 +40,23 @@ public class User {
 
     /**
      * Put our account into account manager
+     *
      * @param email
      * @param password
      * @return boolean
      */
     public boolean saveToAccountManager(String email, String password) {
-        this.account = new Account(email, this.context.getString(R.string.accountType));
-        boolean result = (AccountManager.get(this.context)).addAccountExplicitly(account, password, null);
+        this.account = new Account(email, "boxbonus.auth");
+
+        SharedPreferences sharedPreferences = this.context.getSharedPreferences("account", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("email", email );
+        boolean result = editor.commit();
+
+
+//        AccountManager am = AccountManager.get(this.context);
+//        boolean result = am.addAccountExplicitly(account, password, null);
 
         return result;
     }
@@ -65,7 +74,7 @@ public class User {
         JsonObject jOAttributes = (JsonObject) jsonObject.get("attributes");
         JsonObject jOCustomer = (JsonObject) jOAttributes.get("customer");
 
-        customer.id =jOCustomer.get("id").getAsInt();
+        customer.id = jOCustomer.get("id").getAsInt();
         customer.balance = jOCustomer.get("balance").getAsInt();
 
         /**
@@ -77,5 +86,6 @@ public class User {
 
         return user;
     }
+
 
 }

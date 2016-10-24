@@ -3,6 +3,9 @@ package com.ixvil.boxbonus;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 
 import com.ixvil.boxbonus.models.User;
 
@@ -16,8 +19,14 @@ public class BoxBonusApplication extends Application {
     @Override
     public void onCreate() {
 
-        AccountManager accountManager = AccountManager.get(this);
-//        Account[] accounts = accountManager.getAccountsByType('com.ixvil.boxbonus');
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", null);
+
+        if(null == email){
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
 
     }
 

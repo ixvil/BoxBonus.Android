@@ -36,10 +36,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AccountManager am = AccountManager.get(this);
-
-        Account[] account = am.getAccountsByType(getString(R.string.accountType));
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
