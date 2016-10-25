@@ -61,7 +61,7 @@
                 android:layout_marginTop="5dp"
 
                 app:tabGravity="center"
-                app:tabMode="scrollable"></android.support.design.widget.TabLayout>
+                app:tabMode="scrollable" />
         </android.support.design.widget.AppBarLayout>
 
     </android.support.design.widget.CoordinatorLayout>

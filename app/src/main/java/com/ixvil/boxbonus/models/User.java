@@ -1,16 +1,18 @@
-package com.ixvil.boxbonus.models;
+package com.ixvil.boxbonus.Models;
 
 import android.accounts.Account;
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import com.google.gson.JsonObject;
 
 public class User {
 
 
-    public static int userId;
+    public static User staticUser;
     private final Context context;
     public JsonObject userData;
+
 
     public String name;
     public int id;
@@ -45,6 +47,7 @@ public class User {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("email", email);
+        User.staticUser = this;
         boolean result = editor.commit();
 
         return result;
@@ -59,6 +62,7 @@ public class User {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.remove("email");
+        User.staticUser = null;
         boolean result = editor.commit();
 
         return result;
@@ -78,6 +82,7 @@ public class User {
 
         customer.id = jOCustomer.get("id").getAsInt();
         customer.balance = jOCustomer.get("balance").getAsInt();
+        customer.walletId = jOCustomer.get("walletId").getAsInt();
 
         /**
          * TODO: test and debug getContext()

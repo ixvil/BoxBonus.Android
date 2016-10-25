@@ -1,4 +1,4 @@
-package com.ixvil.boxbonus.models;
+package com.ixvil.boxbonus.Models;
 
 
 import android.graphics.Bitmap;

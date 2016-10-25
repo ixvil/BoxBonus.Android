@@ -1,4 +1,4 @@
-package com.ixvil.boxbonus;
+package com.ixvil.boxbonus.Activities;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ixvil.boxbonus.R;
 
 /**
  * Provides UI for the Detail page with Collapsing Toolbar.

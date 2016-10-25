@@ -1,4 +1,4 @@
-package com.ixvil.boxbonus;
+package com.ixvil.boxbonus.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ixvil.boxbonus.models.Wallet;
+import com.ixvil.boxbonus.R;
+import com.ixvil.boxbonus.Models.Wallet;
 
 
 public class HomeFragment extends Fragment {

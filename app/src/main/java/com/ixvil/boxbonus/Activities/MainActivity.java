@@ -1,7 +1,5 @@
-package com.ixvil.boxbonus;
+package com.ixvil.boxbonus.Activities;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,12 +15,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-import com.ixvil.boxbonus.models.User;
-import com.vk.sdk.VKAccessToken;
-import com.vk.sdk.VKCallback;
-import com.vk.sdk.VKSdk;
-import com.vk.sdk.api.VKError;
+import com.ixvil.boxbonus.Fragments.CardContentFragment;
+import com.ixvil.boxbonus.Fragments.HomeFragment;
+import com.ixvil.boxbonus.R;
+import com.ixvil.boxbonus.Models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        TextView newTextView = new TextView(getApplicationContext());
+//        newTextView.setText("test");
+//        navigationView.addView(newTextView);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
         ActionBar supportActionBar = getSupportActionBar();

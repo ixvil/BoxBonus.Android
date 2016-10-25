@@ -1,4 +1,4 @@
-package com.ixvil.boxbonus;
+package com.ixvil.boxbonus.Activities;
 
 import android.accounts.AccountAuthenticatorActivity;
 import android.animation.Animator;
@@ -6,7 +6,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.support.test.espresso.core.deps.guava.hash.Hashing;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
 import android.content.CursorLoader;
@@ -33,7 +32,8 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.JsonObject;
-import com.ixvil.boxbonus.models.User;
+import com.ixvil.boxbonus.R;
+import com.ixvil.boxbonus.Models.User;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
@@ -44,7 +44,7 @@ import java.util.List;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AccountAuthenticatorActivity implements LoaderCallbacks<Cursor>  {
+public class LoginActivity extends AccountAuthenticatorActivity implements LoaderCallbacks<Cursor> {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -172,16 +172,16 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
                                         startActivity(intent);
 
                                     } else {
-                                        User.userId = 0;
-
                                         mPasswordView.setError(getString(R.string.auth_error));
                                         mPasswordView.requestFocus();
+                                        User.staticUser = null;
                                         showProgress(false);
 
                                     }
                                 } else {
                                     mPasswordView.setError(getString(R.string.message_noserver));
                                     mPasswordView.requestFocus();
+                                    User.staticUser = null;
                                     showProgress(false);
                                     result = new JsonObject();
                                 }
@@ -193,6 +193,7 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
             } catch (Exception e) {
                 mPasswordView.setError(e.getMessage());
                 mPasswordView.requestFocus();
+                User.staticUser = null;
                 showProgress(false);
             }
         }
@@ -234,15 +235,15 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
                                         startActivity(intent);
 
                                     } else {
-                                        User.userId = 0;
-
                                         mPasswordView.setError(userJson.get("message").getAsString());
                                         mPasswordView.requestFocus();
+                                        User.staticUser = null;
                                         showProgress(false);
                                     }
                                 } else {
                                     mPasswordView.setError(e.getMessage().toString());
                                     mPasswordView.requestFocus();
+                                    User.staticUser = null;
                                     showProgress(false);
                                     result = new JsonObject();
                                 }
@@ -252,6 +253,7 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
             } catch (Exception e) {
                 mPasswordView.setError(e.getMessage().toString());
                 mPasswordView.requestFocus();
+                User.staticUser = null;
                 showProgress(false);
             }
         }

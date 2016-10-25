@@ -1,4 +1,4 @@
-        package com.ixvil.boxbonus;
+        package com.ixvil.boxbonus.Fragments;
 
         import android.content.Context;
         import android.content.Intent;
@@ -18,7 +18,10 @@
         import android.widget.ImageView;
         import android.widget.TextView;
 
-/**
+        import com.ixvil.boxbonus.Activities.ShopActivity;
+        import com.ixvil.boxbonus.R;
+
+        /**
  * Provides UI for the view with Cards.
  */
 public class CardContentFragment extends Fragment {

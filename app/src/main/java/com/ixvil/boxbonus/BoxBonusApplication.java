@@ -1,13 +1,11 @@
 package com.ixvil.boxbonus;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.ixvil.boxbonus.models.User;
+import com.ixvil.boxbonus.Activities.LoginActivity;
 
 /**
  * Created by shipin_a on 02.10.2016.
