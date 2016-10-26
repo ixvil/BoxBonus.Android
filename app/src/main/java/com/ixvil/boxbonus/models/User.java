@@ -3,7 +3,6 @@ package com.ixvil.boxbonus.Models;
 import android.accounts.Account;
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import com.google.gson.JsonObject;
 
 public class User {
@@ -15,6 +14,7 @@ public class User {
 
 
     public String name;
+    public String email;
     public int id;
 
     public Customer customer;
@@ -47,8 +47,12 @@ public class User {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("email", email);
-        User.staticUser = this;
+        editor.putString("userData", String.valueOf(this.userData));
+
         boolean result = editor.commit();
+
+
+        User.staticUser = this;
 
         return result;
     }
@@ -62,6 +66,7 @@ public class User {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.remove("email");
+        editor.remove("userData");
         User.staticUser = null;
         boolean result = editor.commit();
 
@@ -74,7 +79,7 @@ public class User {
      * @param jsonObject
      * @return User
      */
-    static public User createUserFromJson(JsonObject jsonObject, Context context) {
+    static public User createUserFromJson(String email, JsonObject jsonObject, Context context) {
 
         Customer customer = new Customer();
         JsonObject jOAttributes = (JsonObject) jsonObject.get("attributes");
@@ -84,11 +89,15 @@ public class User {
         customer.balance = jOCustomer.get("balance").getAsInt();
         customer.walletId = jOCustomer.get("walletId").getAsInt();
 
+        Wallet.setWalletId(customer.walletId);
+
         /**
          * TODO: test and debug getContext()
          */
         User user = new User(customer, context);
         user.id = jsonObject.get("id").getAsInt();
+        user.email = email;
+        user.name = jOAttributes.get("name").getAsString();
         user.userData = jsonObject;
 
         return user;

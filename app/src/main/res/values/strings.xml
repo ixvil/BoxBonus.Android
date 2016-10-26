@@ -19,26 +19,28 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Login</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="action_sign_in_short">Войти</string>
+    <string name="error_invalid_email">Неправильный формат Email</string>
+    <string name="error_invalid_password">Слишком короткий пароль</string>
+    <string name="error_incorrect_password">Пароль неверный</string>
+    <string name="error_field_required">Поле обязательно для заполнения</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_main2">Main2Activity</string>
+
     <string name="textcard">Идеология существенно формирует эмпирический политический процесс в современной России (приводится по работе Д.Белла \"Грядущее постиндустриальное общество\"). Христианско-демократический национализм, несмотря на внешние воздействия, верифицирует институциональный субъект власти. Понятие политического участия последовательно. Политическая коммуникация интегрирует либерализм.</string>
-    <string name="action_register">Register</string>
+    <string name="action_register">Создать аккаунт</string>
     <string name="hostname">http://52.32.2.151/</string>
-    <string name="auth_error">No such user, or password is incorrect</string>
+    <string name="auth_error">Пользователь не найден, или пароль введен неправильно</string>
     <string name="accountType">com.ixvil.boxbonus</string>
     <string name="text.logout">Выйти</string>
     <string name="message_noserver">Сервер не отвечает, попробуйте позже</string>
     <string name="tfbonuses">У вас 25 бонусов</string>
+    <string name="need_help">Нужна помощь?</string>
+    <string name="you_have">"У вас "</string>
+    <string name="bonuses_string">" бонусов!"</string>
 
-    <integer name="com_vk_sdk_AppId">5651075</integer>
 
 </resources>

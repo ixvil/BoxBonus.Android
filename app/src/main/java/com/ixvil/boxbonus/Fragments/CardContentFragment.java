@@ -1,27 +1,27 @@
-        package com.ixvil.boxbonus.Fragments;
+package com.ixvil.boxbonus.Fragments;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.res.Resources;
-        import android.content.res.TypedArray;
-        import android.graphics.drawable.Drawable;
-        import android.os.Bundle;
-        import android.support.design.widget.Snackbar;
-        import android.support.v4.app.Fragment;
-        import android.support.v7.widget.LinearLayoutManager;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.Button;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import com.ixvil.boxbonus.Activities.ShopActivity;
-        import com.ixvil.boxbonus.R;
+import com.ixvil.boxbonus.Activities.ShopActivity;
+import com.ixvil.boxbonus.R;
 
-        /**
+/**
  * Provides UI for the view with Cards.
  */
 public class CardContentFragment extends Fragment {
@@ -42,6 +42,7 @@ public class CardContentFragment extends Fragment {
         public ImageView picture;
         public TextView name;
         public TextView description;
+
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.fragment_card_list, parent, false));
             picture = (ImageView) itemView.findViewById(R.id.card_image);
@@ -58,8 +59,8 @@ public class CardContentFragment extends Fragment {
             });
 
             // Adding Snackbar to Action Button inside card
-            Button button = (Button)itemView.findViewById(R.id.action_button);
-            button.setOnClickListener(new View.OnClickListener(){
+            Button button = (Button) itemView.findViewById(R.id.action_button);
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Snackbar.make(v, "Action is pressed",
@@ -69,7 +70,7 @@ public class CardContentFragment extends Fragment {
 
             ImageButton favoriteImageButton =
                     (ImageButton) itemView.findViewById(R.id.like_button);
-            favoriteImageButton.setOnClickListener(new View.OnClickListener(){
+            favoriteImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Snackbar.make(v, "Added to Favorite",
@@ -78,7 +79,7 @@ public class CardContentFragment extends Fragment {
             });
 
             ImageButton shareImageButton = (ImageButton) itemView.findViewById(R.id.share_button);
-            shareImageButton.setOnClickListener(new View.OnClickListener(){
+            shareImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Snackbar.make(v, "Share article",

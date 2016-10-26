@@ -14,7 +14,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.ixvil.boxbonus.Fragments.CardContentFragment;
@@ -29,25 +31,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     private DrawerLayout mDrawerLayout;
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-
-
+    private void proceedNavigation() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        TextView newTextView = new TextView(getApplicationContext());
-//        newTextView.setText("test");
-//        navigationView.addView(newTextView);
+        View headerLayout = navigationView.getHeaderView(0);
+
+        TextView fioField = (TextView) headerLayout.findViewById(R.id.fioField);
+        fioField.setText(User.staticUser.name);
+
+        TextView emailField = (TextView) headerLayout.findViewById(R.id.emailField);
+        emailField.setText(User.staticUser.email);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
@@ -78,6 +70,25 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
                 });
     }
 
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+
+        this.proceedNavigation();
+
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), getResources().getString(R.string.home_button));
@@ -86,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         viewPager.setAdapter(adapter);
     }
 
-
     @Override
     public void onFragmentInteraction(Uri uri) {
+
 
     }
 

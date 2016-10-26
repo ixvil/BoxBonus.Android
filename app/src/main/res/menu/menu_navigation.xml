@@ -10,12 +10,12 @@
 
         <item
             android:icon="@drawable/ic_favorite_black_24dp"
-            android:title="Two" />
+            android:title="Two" /-->
 
 
         <item
-            android:icon="@drawable/ic_bookmark_border_black_24dp"
-            android:title="Three" /-->
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Профиль" />
 
 
     </group>

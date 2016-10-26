@@ -166,9 +166,10 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
                                     int userId = userJson.get("id").getAsInt();
                                     if (0 != userId) {
 
-                                        User user = User.createUserFromJson(userJson, getApplicationContext());
+                                        User user = User.createUserFromJson(email, userJson, getApplicationContext());
                                         user.saveToAccountManager(email, mPassword);
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        finish();
                                         startActivity(intent);
 
                                     } else {
@@ -229,9 +230,10 @@ public class LoginActivity extends AccountAuthenticatorActivity implements Loade
                                     int userId = userJson.get("id").getAsInt();
                                     if (0 != userId) {
 
-                                        User user = User.createUserFromJson(userJson, getApplicationContext());
+                                        User user = User.createUserFromJson(email, userJson, getApplicationContext());
                                         user.saveToAccountManager(email, mPassword);
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        finish();
                                         startActivity(intent);
 
                                     } else {

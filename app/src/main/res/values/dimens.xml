@@ -21,4 +21,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="pic_height">250dp</dimen>
     <dimen name="bonus_text_size">25dp</dimen>
+    <dimen name="nav_header_vertical_spacing">45dp</dimen>
 </resources>

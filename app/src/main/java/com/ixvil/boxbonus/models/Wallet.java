@@ -13,7 +13,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class Wallet {
 
-    private static Integer walletId = 6587098;
+    private static Integer walletId = 0000000000;
 
     static public Integer getWalletId() {
         return walletId;
@@ -34,5 +34,9 @@ public class Wallet {
 
         }
         return bitmap;
+    }
+
+    public static void setWalletId(int walletId) {
+        Wallet.walletId = walletId;
     }
 }
