@@ -26,16 +26,16 @@ public class BoxBonusApplication extends Application {
         String email = sharedPreferences.getString("email", null);
         String textUserData = sharedPreferences.getString("userData", null);
 
+        Context context = this.getApplicationContext();
 
         if (null == email || null == textUserData) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(context, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {
-//            JsonReader jsonReader = new JsonReader(new StringReader(textUserData));
 
             JsonObject jsonObject = (new Gson()).fromJson(textUserData, JsonObject.class);
-            User.staticUser = User.createUserFromJson(email, jsonObject, getApplicationContext());
+            User.staticUser = User.createUserFromJson(email, jsonObject, context);
 
         }
 
